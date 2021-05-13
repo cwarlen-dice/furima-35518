@@ -26,7 +26,6 @@
 | Column                | Type       | Options                                      |
 | --------------------- | ---------- | -------------------------------------------- |
 | user                  | references | null: false, foreign_key: true               |
-| image                 |            | ActiveStorage                                |
 | name                  | string     | null: false                                  |
 | info                  | text       | null: false                                  |
 | category_id           | integer    | null: false, ActiveHash                      |
