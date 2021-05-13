@@ -25,7 +25,7 @@
 
 | Column                | Type       | Options                                      |
 | --------------------- | ---------- | -------------------------------------------- |
-| user_id               | references | null: false, foreign_key: true               |
+| user                  | references | null: false, foreign_key: true               |
 | image                 |            | ActiveStorage                                |
 | name                  | string     | null: false                                  |
 | info                  | text       | null: false                                  |
@@ -54,10 +54,10 @@
 
 ### orders テーブル
 
-| Column  | Type       | Options                        |
-| ------- | ---------- | ------------------------------ |
-| user_id | references | null: false, foreign_key: true |
-| item_id | references | null: false, foreign_key: true |
+| Column | Type       | Options                        |
+| ------ | ---------- | ------------------------------ |
+| user   | references | null: false, foreign_key: true |
+| item   | references | null: false, foreign_key: true |
 
 #### Association
 
@@ -75,7 +75,7 @@
 | addresses     | string     | null: false                    |
 | building      | string     |                                |
 | phone_number  | string     | null: false                    |
-| order_id      | references | null: false, foreign_key: true |
+| order         | references | null: false, foreign_key: true |
 
 #### Association
 
@@ -92,8 +92,8 @@
 | Column  | Type       | Options                        |
 | ------- | ---------- | ------------------------------ |
 | comment | text       | null: false                    |
-| user_id | references | null: false, foreign_key: true |
-| item_id | references | null: false, foreign_key: true |
+| user    | references | null: false, foreign_key: true |
+| item    | references | null: false, foreign_key: true |
 
 #### Association
 
