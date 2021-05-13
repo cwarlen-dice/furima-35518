@@ -119,7 +119,7 @@
 
 #### Association
 
-- has_one :item
+- has_many :items
 
 ### sales_status Hash
 
@@ -135,7 +135,7 @@
 
 #### Association
 
-- has_one :item
+- has_many :items
 
 ### shipping_fee Hash
 
@@ -147,7 +147,7 @@
 
 #### Association
 
-- has_one :item
+- has_many :items
 
 ### prefecture Hash
 
@@ -204,8 +204,8 @@
 
 #### Association
 
-- has_one :item
-- has_one :order
+- has_many :items
+- has_many :orders
 
 ### scheduled_delivery Hash
 
@@ -218,4 +218,4 @@
 
 #### Association
 
-- has_one :item
+- has_many :items
