@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :user do
     email	{ Faker::Internet.free_email }
-    password	{ Faker::Internet.password(min_length: 6) }
+    password	{ 'a1' + Faker::Internet.password(min_length: 6) }
     password_confirmation { password }
     nickname	{ Faker::Name.name }
     first_name	{ Gimei.name.first.kanji }
@@ -11,6 +11,8 @@ FactoryBot.define do
     birth_date	{ Faker::Date.birthday }
   end
 
+  # password	{ '000000' }
+  # password	{ Faker::Internet.password(min_length: 6) }
   # # 日本人名
   # Faker::Config.locale = :ja
   # # 英語人名
