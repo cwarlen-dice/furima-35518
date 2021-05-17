@@ -12,7 +12,7 @@ class Item < ApplicationRecord
 
   with_options presence: true do
     validates :image
-    validates :name
+    validates :name, length: { maximum: 40 }
     validates :info
     with_options numericality: { other_than: 0 } do
       validates :category_id
