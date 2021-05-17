@@ -9,4 +9,14 @@ class Item < ApplicationRecord
   belongs_to :shipping_fee
   belongs_to :prefecture
   belongs_to :scheduled_delivery
+
+  with_options presence: true do
+    validates :name
+    validates :info
+    validates :category_id
+    validates :sales_status_id
+    validates :shipping_fee_id
+    validates :prefecture_id
+    validates :scheduled_delivery_id
+    validates :price, numericality: { in: 300..9999999 }
 end
