@@ -59,9 +59,12 @@ group :development do
 end
 
 gem 'active_hash'
+gem 'active_hash'
 gem 'devise'
 gem 'factory_bot_rails'
 gem 'faker'
 gem 'gimei'
+gem 'image_processing', '~> 1.2'
+gem 'mini_magick'
 gem 'pry-byebug'
 gem 'rspec-rails'
