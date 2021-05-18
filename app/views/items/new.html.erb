@@ -48,7 +48,6 @@
           カテゴリー
           <span class="indispensable">必須</span>
         </div>
-        <%#= form.collection_select(:dest_column, array.all, :src_id, :view_var, {}, {class:${"class_name}"}) %>
         <%= f.collection_select(:category_id, Category.all, :id, :data, {}, {class:"select-box", id:"item-category"}) %>
         <div class="weight-bold-text">
           商品の状態
