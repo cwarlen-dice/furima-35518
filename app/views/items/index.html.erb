@@ -135,16 +135,20 @@
         <div class='item-img-content'>
           <%= image_tag item.image, class: "item-img" %>
 
-
+          <%# この機能は、商品購入機能実装時に実装する %>
+          <%
+=begin
+%>
           <% if item.methods.include?('order') %>
           <%# 商品が売れていればsold outを表示しましょう %>
-          <%# この機能は、商品購入機能実装時に実装する。現在は、orderのアソシエーションが有るか無しかで表示の有無を判定 %>
           <div class='sold-out'>
             <span>Sold Out!!</span>
           </div>
           <%# //商品が売れていればsold outを表示しましょう %>
           <% end %>
-
+          <%
+=end
+%>
 
         </div>
         <div class='item-info'>
