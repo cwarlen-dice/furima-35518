@@ -1,7 +1,6 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, except: %i[index show]
-  before_action :one_item, only: %i[show edit update]
-  before_action :check_user, only: %i[edit update]
+  before_action :set_one_item, only: %i[show edit update]
 
   def index
     @items = Item.all.order(created_at: :DESC)
@@ -24,14 +23,22 @@ class ItemsController < ApplicationController
   end
 
   def edit
+    check_user(@item)
   end
 
   def update
+    check_user(@item)
     if @item.update(item_params)
       redirect_to(item_path(params[:id]))
     else
       render :edit
     end
+  end
+
+  def destroy
+    item = Item.find(params[:id])
+    check_user(item)
+    redirect_to(root_path) if item.destroy
   end
 
   private
@@ -41,11 +48,11 @@ class ItemsController < ApplicationController
                                  :scheduled_delivery_id, :price, :image).merge(user_id: current_user.id)
   end
 
-  def one_item
+  def set_one_item
     @item = Item.find(params[:id])
   end
 
-  def check_user
-    redirect_to(root_path) unless current_user.id == @item.user.id
+  def check_user(var)
+    redirect_to(root_path) unless current_user.id == var.user.id
   end
 end
