@@ -10,7 +10,7 @@ class OrderDestination
     validates :addresses
     with_options format: { allow_blank: true } do
       validates :postal_code, format: { with: /\A[0-9]{3}-[0-9]{4}\z/, message: 'is invalid. 7 digit including hyphen(-)' }
-      validates :phone_number, format: { with: /\A\d{11}\z/, message: 'is invalid. 11 digit number without (-)' }
+      validates :phone_number, format: { with: /\A\d+\z/, message: 'is invalid. Number without (-)' }
     end
     validates :price
     validates :card
