@@ -1,9 +1,10 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, except: %i[index show]
-  before_action :set_one_item, only: %i[show edit update]
+  before_action :set_one_item, only: %i[edit update]
+  before_action :set_item_includes, only: %i[show index]
 
   def index
-    @items = Item.all.order(created_at: :DESC)
+    @items = @item_in_other.all.order(created_at: :DESC)
   end
 
   def new
@@ -20,14 +21,15 @@ class ItemsController < ApplicationController
   end
 
   def show
+    @item = @item_in_other.find(params[:id])
   end
 
   def edit
-    check_user(@item)
+    check_sold_user(@item)
   end
 
   def update
-    check_user(@item)
+    check_sold_user(@item)
     if @item.update(item_params)
       redirect_to(item_path(params[:id]))
     else
@@ -37,7 +39,7 @@ class ItemsController < ApplicationController
 
   def destroy
     item = Item.find(params[:id])
-    check_user(item)
+    check_sold_user(item)
     redirect_to(root_path) if item.destroy
   end
 
@@ -52,7 +54,11 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
   end
 
-  def check_user(var)
-    redirect_to(root_path) unless current_user.id == var.user.id
+  def set_item_includes
+    @item_in_other = Item.with_attached_image.includes(:order)
+  end
+
+  def check_sold_user(var)
+    redirect_to(root_path) unless var.order.nil? && current_user.id == var.user.id
   end
 end

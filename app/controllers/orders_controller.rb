@@ -21,8 +21,10 @@ class OrdersController < ApplicationController
   private
 
   def order_params
-    params.require(:order_destination).permit(:postal_code, :prefecture_id, :city, :addresses, :building,
-                                              :phone_number).merge(user_id: current_user.id, item_id: params[:item_id], price: @item.price, card: params[:token])
+    params.require(:order_destination).permit(:postal_code, :prefecture_id, :city, :addresses, :building, :phone_number).merge( \
+      user_id: current_user.id, item_id: params[:item_id] \
+      , price: @item.price, card: params[:token]
+    )
   end
 
   def one_item_set
@@ -30,9 +32,7 @@ class OrdersController < ApplicationController
   end
 
   def check_sold_user
-    query = "SELECT * FROM orders WHERE item_id = #{params[:item_id]} LIMIT 1"
-    order = Order.find_by_sql(query)
-    redirect_to(root_path) and return unless order == [] && current_user.id != @item.user.id
+    redirect_to(root_path) and return unless @item.order.nil? && current_user.id != @item.user_id
   end
 
   def pay_item
