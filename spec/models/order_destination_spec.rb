@@ -3,11 +3,10 @@ require 'rails_helper'
 RSpec.describe OrderDestination, type: :model do
   describe '#create' do
     before do
-      user = FactoryBot.build(:user)
-      item = FactoryBot.build(:item)
+      user = FactoryBot.build(:user, id: Faker::Number.number)
+      item = FactoryBot.build(:item, id: Faker::Number.number)
       @order_destination = FactoryBot.build(:order_destination, user_id: user.id, item_id: item.id)
     end
-
     describe '送り先登録' do
       context '登録できるとき' do
         it 'すべての値が正しく入力されていれば登録できる' do

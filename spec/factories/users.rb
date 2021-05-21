@@ -14,6 +14,5 @@ FactoryBot.define do
     first_name_kana	{ Gimei.name.first.katakana }
     last_name_kana	{ Gimei.name.last.katakana }
     birth_date	{ Faker::Date.birthday }
-    id	{ Faker::Number.number } # order_destinationのテストで使用
   end
 end
