@@ -1,5 +1,7 @@
 class OrdersController < ApplicationController
+  before_action :authenticate_user!
   before_action :one_item_set, only: %i[index create]
+  before_action :check_sold_user, only: %i[index create]
 
   def index
     @order_destination = OrderDestination.new
@@ -10,7 +12,7 @@ class OrdersController < ApplicationController
     if @order_destination.valid?
       pay_item
       @order_destination.save
-      redirect_to(item_path(params[:item_id]))
+      redirect_to(item_path(params[:item_id])) and return
     else
       render :index
     end
@@ -25,6 +27,12 @@ class OrdersController < ApplicationController
 
   def one_item_set
     @item = Item.find(params[:item_id])
+  end
+
+  def check_sold_user
+    query = "SELECT * FROM orders WHERE item_id = #{params[:item_id]} LIMIT 1"
+    order = Order.find_by_sql(query)
+    redirect_to(root_path) and return unless order == [] && current_user.id != @item.user.id
   end
 
   def pay_item
