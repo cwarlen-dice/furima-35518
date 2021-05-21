@@ -8,6 +8,7 @@ FactoryBot.define do
     prefecture_id	{ Faker::Number.within(range: 1..47) }
     scheduled_delivery_id	{ Faker::Number.within(range: 1..3) }
     price	{ Faker::Number.within(range: 300..9_999_999) }
+    id	{ Faker::Number.number } # order_destinationのテストで使用
 
     association :user
 

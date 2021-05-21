@@ -1,4 +1,9 @@
 FactoryBot.define do
+  # Fakerのlocale設定変更用
+  # Faker::Config.locale = :ja # 日本人名
+  # Faker::Config.locale = :en # 英語人名
+  # Faker::Config.locale = 'zh-CN' # 中国人名
+
   factory :user do
     email	{ Faker::Internet.free_email }
     password	{ "a1#{Faker::Internet.password(min_length: 6)}" }
@@ -9,14 +14,6 @@ FactoryBot.define do
     first_name_kana	{ Gimei.name.first.katakana }
     last_name_kana	{ Gimei.name.last.katakana }
     birth_date	{ Faker::Date.birthday }
+    id	{ Faker::Number.number } # order_destinationのテストで使用
   end
-
-  # password	{ '000000' }
-  # password	{ Faker::Internet.password(min_length: 6) }
-  # # 日本人名
-  # Faker::Config.locale = :ja
-  # # 英語人名
-  # Faker::Config.locale = :en
-  # # 中国人名
-  # Faker::Config.locale = 'zh-CN'
 end
