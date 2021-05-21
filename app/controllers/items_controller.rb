@@ -1,6 +1,7 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, except: %i[index show]
-  before_action :set_one_item, only: %i[edit update]
+  before_action :set_one_item, only: %i[edit update destroy]
+  before_action :check_sold_user, only: %i[edit update destroy]
   before_action :set_item_includes, only: %i[show index]
 
   def index
@@ -25,11 +26,9 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    check_sold_user(@item)
   end
 
   def update
-    check_sold_user(@item)
     if @item.update(item_params)
       redirect_to(item_path(params[:id]))
     else
@@ -38,9 +37,7 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    item = Item.find(params[:id])
-    check_sold_user(item)
-    redirect_to(root_path) if item.destroy
+    redirect_to(root_path) if @item.destroy
   end
 
   private
@@ -58,7 +55,7 @@ class ItemsController < ApplicationController
     @item_in_other = Item.with_attached_image.includes(:order)
   end
 
-  def check_sold_user(var)
-    redirect_to(root_path) unless var.order.nil? && current_user.id == var.user.id
+  def check_sold_user
+    redirect_to(root_path) unless @item.order.nil? && current_user.id == @item.user.id
   end
 end

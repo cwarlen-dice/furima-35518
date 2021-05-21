@@ -3,9 +3,11 @@ require 'rails_helper'
 RSpec.describe OrderDestination, type: :model do
   describe '#create' do
     before do
-      user = FactoryBot.build(:user, id: Faker::Number.number)
-      item = FactoryBot.build(:item, id: Faker::Number.number)
-      @order_destination = FactoryBot.build(:order_destination, user_id: user.id, item_id: item.id)
+      user = FactoryBot.create(:user)
+      item = FactoryBot.create(:item)
+      @order_destination = FactoryBot.build(
+        :order_destination, user_id: user.id, item_id: item.id, price: item.price
+      )
     end
     describe '送り先登録' do
       context '登録できるとき' do
@@ -36,7 +38,9 @@ RSpec.describe OrderDestination, type: :model do
         it 'postal_codeがハイフン無しでは登録できない' do
           @order_destination.postal_code = '00000000'
           @order_destination.valid?
-          expect(@order_destination.errors.full_messages).to include('Postal code is invalid. 7 digits including hyphen(-)')
+          expect(@order_destination.errors.full_messages).to include(
+            'Postal code is invalid. 7 digits including hyphen(-)'
+          )
         end
         it 'prefecture_idが0では登録できない' do
           @order_destination.prefecture_id = 0
@@ -99,7 +103,9 @@ RSpec.describe OrderDestination, type: :model do
         it 'cardが正しい値でないと登録できない' do
           @order_destination.card = 'aaa_abcdefghijk00000000000000000'
           @order_destination.valid?
-          expect(@order_destination.errors.full_messages).to include('Card is invalid. Not enough information')
+          expect(@order_destination.errors.full_messages).to include(
+            'Card is invalid. Not enough information'
+          )
         end
       end
     end
