@@ -69,3 +69,4 @@ gem 'mini_magick'
 gem 'payjp'
 gem 'pry-byebug'
 gem 'rspec-rails'
+gem "aws-sdk-s3", require: false
