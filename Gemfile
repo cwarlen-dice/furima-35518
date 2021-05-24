@@ -59,7 +59,7 @@ group :development do
 end
 
 gem 'active_hash'
-gem 'active_hash'
+gem 'aws-sdk-s3', require: false
 gem 'devise'
 gem 'factory_bot_rails'
 gem 'faker'
@@ -69,4 +69,3 @@ gem 'mini_magick'
 gem 'payjp'
 gem 'pry-byebug'
 gem 'rspec-rails'
-gem "aws-sdk-s3", require: false
