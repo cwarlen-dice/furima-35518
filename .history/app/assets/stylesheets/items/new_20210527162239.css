@@ -228,7 +228,12 @@
   font-size: 13px;
 }
 
-#img-preview {
+/* #image-list>div>img {
   width: 100px;
+  height: 100px;
+} */
+
+#img-preview {
+  width: 200px;
   height: 100px;
 }
