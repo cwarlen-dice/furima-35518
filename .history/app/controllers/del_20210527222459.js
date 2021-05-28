@@ -1,0 +1,3 @@
+del() {
+  console.log('value');
+}
