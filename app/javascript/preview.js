@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
   if (document.getElementById('item-image')) { // 変化監視要素:イメージのフォーム
-    const ImageList = document.getElementById('image-list'); // プレビュー差し込み対象
-    const ImageForm = document.getElementById('item-image-0'); // イメージのフォーム
+    const ImageList = document.getElementById('item-img-list'); // プレビュー差し込み対象
     var ImagesCount = 1; // カウンターセット
 
     const createImageHTML = (blob, e) => {
