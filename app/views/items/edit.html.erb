@@ -20,7 +20,17 @@ app/assets/stylesheets/items/new.css %>
         <p>
           クリックしてファイルをアップロード
         </p>
-        <%= f.file_field :image, id:"item-image" %>
+        <div class="item-img-list">
+          <% @item.images.each_with_index do |image, i| %>
+          <div class="image-element">
+              <%= f.file_field :images, name: "item[images][]", id:"item-image-#{i}" %>
+              <div class="img-btn">
+                <%= image_tag image, class:'img-preview' %>
+                <input type="button" value="非表示" onclick="console.log(this.closest('.image-element').remove())">
+              </div>
+            </div>
+          <% end %>
+        </div>
       </div>
     </div>
     <div class="new-items">

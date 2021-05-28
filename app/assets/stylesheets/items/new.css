@@ -227,22 +227,3 @@
 .inc {
   font-size: 13px;
 }
-
-.img-preview {
-  width: 100px;
-  height: 100px;
-  object-fit: contain;
-  margin-right: 5px;
-}
-
-.image-element {
-  display: flex;
-  flex-direction: column;
-}
-
-.image-del {
-  display: flex;
-  align-items: center;
-  margin-top: 10px;
-  margin-bottom: 10px;
-}

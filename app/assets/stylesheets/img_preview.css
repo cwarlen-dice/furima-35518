@@ -1,0 +1,19 @@
+.image-element {
+  display: flex;
+  flex-direction: column;
+}
+
+.img-btn {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  display: flex;
+  align-items: center;
+  margin: 10px 0px;
+}
+
+.img-preview {
+  width: 100px;
+  height: 100px;
+  margin-right: 5px;
+}

@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-  if (document.getElementById('item-image-0')) { // 変化監視要素:イメージのフォーム
+  if (document.getElementById('item-image')) { // 変化監視要素:イメージのフォーム
     const ImageList = document.getElementById('image-list'); // プレビュー差し込み対象
     const ImageForm = document.getElementById('item-image-0'); // イメージのフォーム
     var ImagesCount = 1; // カウンターセット
@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const createImageHTML = (blob, e) => {
       // eイベントオブジェクトから取得
       const BtnId = e.target.id;
-      console.log(BtnId);
+      // console.log(BtnId);
 
       // 画像を表示するためのdiv要素を生成
       const imageElement = document.createElement('div');
@@ -25,10 +25,10 @@ document.addEventListener('DOMContentLoaded', function () {
       delImage.setAttribute('onclick', `document.getElementById('${BtnId}').value = ""; this.closest(".image-element").remove()`);
 
       // 画像と削除ボタンをセットにする
-      const inputDiv = document.createElement('div');
-      inputDiv.setAttribute('class', 'img-preview image-del');
-      inputDiv.appendChild(blobImage);
-      inputDiv.appendChild(delImage);
+      const divImageBtn = document.createElement('div');
+      divImageBtn.setAttribute('class', 'img-btn');
+      divImageBtn.appendChild(blobImage);
+      divImageBtn.appendChild(delImage);
 
       // ファイル添付ボタンを生成
       const inputFile = document.createElement('input');
@@ -37,9 +37,9 @@ document.addEventListener('DOMContentLoaded', function () {
       inputFile.setAttribute('type', 'file')
 
       // 生成したHTMLの要素をブラウザに表示
-      const elem = document.getElementById(BtnId);
-      imageElement.appendChild(elem);
-      imageElement.appendChild(inputDiv);
+      const btnElem = document.getElementById(BtnId); // 押されたボタンの要素取得
+      imageElement.appendChild(btnElem); //
+      imageElement.appendChild(divImageBtn);
       ImageList.appendChild(imageElement);
       ImageList.appendChild(inputFile);
 
@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function () {
       ImagesCount++; // カウントアップ
     };
 
-    document.getElementById('item-image-0').addEventListener('change', function (e) { // 変化監視要素:イメージのフォーム
+    document.getElementById('item-image').addEventListener('change', function (e) { // 変化監視要素:イメージのフォーム
       const file = e.target.files[0];
       const blob = window.URL.createObjectURL(file);
 
