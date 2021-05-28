@@ -6,7 +6,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const createImageHTML = (blob, e) => {
       // eイベントオブジェクトから取得
       const BtnId = e.target.id;
-      // console.log(BtnId);
 
       // 画像を表示するためのdiv要素を生成
       const imageElement = document.createElement('div');
