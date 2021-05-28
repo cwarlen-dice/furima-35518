@@ -2,8 +2,13 @@ document.addEventListener('DOMContentLoaded', function () {
   if (document.getElementById('item-image-0')) { // 変化監視要素:イメージのフォーム
     const ImageList = document.getElementById('image-list'); // プレビュー差し込み対象
     const ImageForm = document.getElementById('item-image-0'); // イメージのフォーム
+    var ImagesCount = 1; // カウンターセット
 
     const createImageHTML = (blob, e) => {
+      // eイベントオブジェクトから取得
+      const BtnId = e.target.id;
+      console.log(BtnId);
+
       // 画像を表示するためのdiv要素を生成
       const imageElement = document.createElement('div');
       imageElement.setAttribute('class', "image-element");
@@ -14,48 +19,31 @@ document.addEventListener('DOMContentLoaded', function () {
       blobImage.setAttribute('class', 'img-preview');
 
       // ファイル削除ボタンを生成
-      const delHTML = document.createElement('input');
-      delHTML.type = 'button';
-      delHTML.value = '削除';
-      // delHTML.setAttribute('id', `item_image_del_${imageElementNum}`);
-      // delHTML.setAttribute('onclick', 'this.closest(".image-element").remove()');
-      // const addImages = document.querySelectorAll('.image-element'); // 追加された画像の数
-      // const ImagesCount = addImages.length;
-      // const imageElementNum = ImagesCount - 1; // カウンターセット
-      const ImagesCount = 0; // カウンターセット
-      // const targetId = `item-image-${ImagesCount}`;
-      // if (ImagesCount != 0) {
-      // }
-      delHTML.setAttribute('onclick', `document.getElementById('${e.target.id}').value = ""; this.closest(".image-element").remove()`);
+      const delImage = document.createElement('input');
+      delImage.type = 'button';
+      delImage.value = '削除';
+      delImage.setAttribute('onclick', `document.getElementById('${BtnId}').value = ""; this.closest(".image-element").remove()`);
 
       // 画像と削除ボタンをセットにする
       const inputDiv = document.createElement('div');
       inputDiv.setAttribute('class', 'img-preview image-del');
       inputDiv.appendChild(blobImage);
-      inputDiv.appendChild(delHTML);
+      inputDiv.appendChild(delImage);
 
       // ファイル添付ボタンを生成
-      const inputHTML = document.createElement('input');
-      inputHTML.setAttribute('id', `item-image-${ImagesCount}`);
-      inputHTML.setAttribute('name', 'item[images][]'); // formの配列名に合わせる
-      inputHTML.setAttribute('type', 'file')
+      const inputFile = document.createElement('input');
+      inputFile.setAttribute('id', `item-image-${ImagesCount}`);
+      inputFile.setAttribute('name', 'item[images][]'); // formの配列名に合わせる
+      inputFile.setAttribute('type', 'file')
 
       // 生成したHTMLの要素をブラウザに表示
+      const elem = document.getElementById(BtnId);
+      imageElement.appendChild(elem);
       imageElement.appendChild(inputDiv);
-      imageElement.appendChild(inputHTML);
-      console.log(e.target.id);
-      if (e.target.id == 'item-image-0') {
-        // ImageList.appendChild(imageElement);
-        ImageList.prepend(imageElement);
-      }
+      ImageList.appendChild(imageElement);
+      ImageList.appendChild(inputFile);
 
-      // else {
-      //   e.srcElement.insertAdjacentHTML('afterend', imageElement);
-      // }
-      // console.log(e);
-      // console.log(e.srcElement);
-
-      inputHTML.addEventListener('change', (e) => {
+      inputFile.addEventListener('change', (e) => {
         file = e.target.files[0];
         blob = window.URL.createObjectURL(file);
         createImageHTML(blob, e);
