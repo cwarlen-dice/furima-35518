@@ -36,7 +36,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
       // 生成したHTMLの要素をブラウザに表示
       const btnElem = document.getElementById(BtnId); // 押されたボタンの要素取得
-      imageElement.appendChild(btnElem); //
+      btnElem.style.display = "none"; // 押されたボタンを非表示にする
+      imageElement.appendChild(btnElem);
       imageElement.appendChild(divImageBtn);
       ImageList.appendChild(imageElement);
       ImageList.appendChild(inputFile);
